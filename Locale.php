@@ -82,6 +82,10 @@ final class Locale extends \Locale
 
                 return null;
             }
+	     
+	    if (empty($localeSubTags)) {
+                return null;
+	    }
 
             array_pop($localeSubTags);
 
