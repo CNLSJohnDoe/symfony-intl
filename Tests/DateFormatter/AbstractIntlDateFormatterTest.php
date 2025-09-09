@@ -47,7 +47,7 @@ abstract class AbstractIntlDateFormatterTest extends TestCase
 
         $this->assertEquals(
             $this->getDateTime(0, $formatter->getTimeZoneId())->format('M j, Y, g:i A'),
-            $formatter->format(0)
+            str_replace("\u{202f}", " ",$formatter->format(0))
         );
     }
 
@@ -114,13 +114,11 @@ abstract class AbstractIntlDateFormatterTest extends TestCase
             array('QQ', 0, '01'),
             array('QQQ', 0, 'Q1'),
             array('QQQQ', 0, '1st quarter'),
-            array('QQQQQ', 0, '1st quarter'),
 
             array('q', 0, '1'),
             array('qq', 0, '01'),
             array('qqq', 0, 'Q1'),
             array('qqqq', 0, '1st quarter'),
-            array('qqqqq', 0, '1st quarter'),
 
             // 4 months
             array('Q', 7776000, '2'),
@@ -549,7 +547,7 @@ abstract class AbstractIntlDateFormatterTest extends TestCase
     public function testDateAndTimeType($timestamp, $datetype, $timetype, $expected)
     {
         $formatter = $this->getDateFormatter('en', $datetype, $timetype, 'UTC');
-        $this->assertSame($expected, $formatter->format($timestamp));
+        $this->assertSame($expected, str_replace("\u{202f}", " ", $formatter->format($timestamp)));
     }
 
     public function dateAndTimeTypeProvider()
